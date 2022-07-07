@@ -12,6 +12,8 @@ import java.util.List;
 @Getter @Setter
 public class Category {
 
+    private String isitWorking;
+
     @Id
     @GeneratedValue
     @Column(name = "category_id")
