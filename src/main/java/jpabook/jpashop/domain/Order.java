@@ -37,6 +37,8 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; // [ORDER, CANCEL]
 
+
+
     //== 연관관계 메소드 (양방향 연관관계에 대한 atomic 메소드) ==//
     public void setMember(Member member) {
         this.member = member;
@@ -51,6 +53,9 @@ public class Order {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    protected Order() { // 직접 생성 금지
     }
 
     //== 생성 로직 ==//
@@ -85,9 +90,5 @@ public class Order {
         }
         return totalPrice;
     }
-
-
-
-
 
 }
