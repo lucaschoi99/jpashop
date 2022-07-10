@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
@@ -22,11 +23,9 @@ class MemberServiceTest {
     @Autowired MemberRepository memberRepository;
 
     @Test
-    @Rollback(value = false)
     public void memberJoin() throws Exception {
         // Given
-        Member member = new Member();
-        member.setName("choi");
+        Member member = new Member("choi", new Address("Seoul", "Gangnam", "123"));
 
         // When
         Long id = memberService.join(member);
@@ -39,17 +38,17 @@ class MemberServiceTest {
      @Test
      public void duplicateMemberCheck() throws Exception {
          // Given
-         Member m1 = new Member();
-         m1.setName("bin");
-
-         Member m2 = new Member();
-         m2.setName("bin");
+         Member m1 = new Member("choi", new Address("Seoul", "Gangnam", "123"));
+         Member m2 = new Member("choi", new Address("Seoul", "Gangnam", "123"));
 
          // When
          memberService.join(m1);
 
          // Then
          IllegalStateException exception = assertThrows(IllegalStateException.class, () -> memberService.join(m2));
+         System.out.println("--------------------------------");
+         System.out.println("exception.getMessage() = " + exception.getMessage());
+         System.out.println("--------------------------------");
          assertEquals("이미 존재하는 회원입니다.", exception.getMessage());
 
       }
