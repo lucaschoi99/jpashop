@@ -13,4 +13,14 @@ public class Book extends Item {
 
     private String author;
     private String isbn;
+
+    protected Book() {
+    }
+
+    public Book(String author, String isbn, int price, int quantity) {
+        this.author = author;
+        this.isbn = isbn;
+        this.setPrice(price);
+        this.setStockQuantity(quantity);
+    }
 }
