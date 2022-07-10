@@ -9,10 +9,12 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class OrderItem {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "orderitem_id")
     private Long id;
 
@@ -26,6 +28,10 @@ public class OrderItem {
 
     private int orderPrice; // 주문 당시 가격=
     private int count; // 주문 수량
+
+    // 직접 생성 금지
+    protected OrderItem() {
+    }
 
     //== 생성 로직 ==//
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
