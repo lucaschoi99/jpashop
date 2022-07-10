@@ -23,7 +23,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
-ㅇ    // Constructor
+    // Constructor
     public Member() {
     }
 
