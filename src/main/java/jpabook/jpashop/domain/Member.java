@@ -23,6 +23,12 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
+ㅇ    // Constructor
+    public Member() {
+    }
 
-
+    public Member(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
 }
