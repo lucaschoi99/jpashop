@@ -14,11 +14,4 @@ public class Album extends Item {
     private String artist;
     private String etc;
 
-    protected Album() {
-    }
-
-    public Album(String artist, String etc) {
-        this.artist = artist;
-        this.etc = etc;
-    }
 }

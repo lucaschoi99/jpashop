@@ -34,7 +34,7 @@ class OrderServiceTest {
         Member member = new Member("bin", new Address("Seoul", "Gangnam", "123"));
         em.persist(member);
 
-        Book book = new Book("choi's", "isbn123", 10000, 10);
+        Book book = createBook();
         em.persist(book);
 
         // When
@@ -51,11 +51,24 @@ class OrderServiceTest {
 
     }
 
+    private Book createBook() {
+
+        Book book = new Book();
+        book.setName("JPA Java Spring");
+        book.setAuthor("choi");
+        book.setIsbn("isbn1234");
+        book.setPrice(10000);
+        book.setStockQuantity(10);
+
+        return book;
+
+    }
+
     @Test
     public void notEnoughQuantity() throws Exception {
         // Given
         Member member = new Member("bin", new Address("Seoul", "Gangnam", "123"));
-        Book book = new Book("choi's", "isbn123", 10000, 10);
+        Book book = createBook();
 
         em.persist(member);
         em.persist(book);
@@ -74,7 +87,7 @@ class OrderServiceTest {
      public void cancelCheck() throws Exception {
          // Given
          Member member = new Member("bin", new Address("Seoul", "Gangnam", "123"));
-         Book book = new Book("choi's", "isbn123", 10000, 10);
+         Book book = createBook();
 
          em.persist(member);
          em.persist(book);
