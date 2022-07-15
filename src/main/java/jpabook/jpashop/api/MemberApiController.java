@@ -17,10 +17,20 @@ public class MemberApiController {
 
     private final MemberService memberService;
 
-    @PostMapping("/api/v1/members")
-    public CreateMemberResponse saveMember(@RequestBody @Valid Member member) {
+    @PostMapping("/api/members")
+    public CreateMemberResponse saveMember(@RequestBody @Valid CreateMemberRequest request) {
+
+        Member member = new Member();
+        member.setName(request.getName());
+
         Long id = memberService.join(member);
         return new CreateMemberResponse(id);
+    }
+
+    @Data
+    static class CreateMemberRequest {
+        private String name;
+
     }
 
     @Data
