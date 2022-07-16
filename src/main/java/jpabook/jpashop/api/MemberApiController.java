@@ -19,7 +19,7 @@ public class MemberApiController {
 
     private final MemberService memberService;
 
-    @PostMapping("/api/members")
+    @PostMapping("/api/members/new")
     public CreateMemberResponse saveMember(@RequestBody @Valid CreateMemberRequest request) {
 
         Member member = new Member();
