@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,6 +37,11 @@ public class MemberApiController {
         Member member = memberService.findOne(id);
 
         return new UpdateMemberResponse(member.getId(), member.getName());
+    }
+
+    @GetMapping("/api/members")
+    public List<Member> findmembers() {
+        return memberService.findMembers();
     }
 
 
