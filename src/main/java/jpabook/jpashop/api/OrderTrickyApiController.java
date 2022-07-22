@@ -26,17 +26,17 @@ public class OrderTrickyApiController {
     private final OrderRepository orderRepository;
 
     @GetMapping("/api/tricky-orders")
-    public List<TrickyOrderDto> findOrders() {
+    public List<CollectionOrderDto> findOrders() {
         // Fetch join
-        List<Order> orders = orderRepository.findOrdersWithMemDel();
+        List<Order> orders = orderRepository.findCollectionOrders();
         return orders.stream()
-                .map(o -> new TrickyOrderDto(o))
+                .map(o -> new CollectionOrderDto(o))
                 .collect(Collectors.toList());
     }
 
 
     @Data
-    static class TrickyOrderDto {
+    static class CollectionOrderDto {
 
         private Long orderId;
         private String name;
@@ -45,7 +45,7 @@ public class OrderTrickyApiController {
         private Address address;
         private List<OrderItemDto> orderItems;
 
-        public TrickyOrderDto(Order o) {
+        public CollectionOrderDto(Order o) {
             orderId = o.getId();
             name = o.getMember().getName();
             orderDate = o.getOrderDate();
