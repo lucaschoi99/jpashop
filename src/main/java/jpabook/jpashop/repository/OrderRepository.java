@@ -60,13 +60,13 @@ public class OrderRepository {
         ).getResultList();
     }
 
-    public List<Order> findCollectionOrders() {
+    public List<Order> findCollectionOrders(int offset, int limit) {
         return em.createQuery(
                 "select distinct o from Order o" +
                         " join fetch o.member m" +
-                        " join fetch o.delivery d" +
-                        " join fetch o.orderItems oi" +
-                        " join fetch oi.item i", Order.class)
+                        " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
                 .getResultList();
     }
 }

@@ -8,6 +8,7 @@ import jpabook.jpashop.repository.OrderRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -26,9 +27,11 @@ public class OrderTrickyApiController {
     private final OrderRepository orderRepository;
 
     @GetMapping("/api/tricky-orders")
-    public List<CollectionOrderDto> findOrders() {
-        // Fetch join
-        List<Order> orders = orderRepository.findCollectionOrders();
+    public List<CollectionOrderDto> findOrders(
+            @RequestParam(value = "offset", defaultValue = "0") int offset,
+            @RequestParam(value = "limit", defaultValue = "100") int limit) {
+        // Fetch join + Paging
+        List<Order> orders = orderRepository.findCollectionOrders(offset, limit);
         return orders.stream()
                 .map(o -> new CollectionOrderDto(o))
                 .collect(Collectors.toList());
